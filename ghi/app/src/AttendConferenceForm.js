@@ -28,11 +28,14 @@ function AttendConferenceForm() {
             setFullName('');
             setEmail('');
             setConference('');
+            setHasSignedUp(true);
             // setShowSuccessMessage(true);
         }
     }
 
     const [conferences, setConferences] = useState([]);
+
+    const [hasSignedUp, setHasSignedUp] = useState(false);
 
     // const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
@@ -67,8 +70,22 @@ function AttendConferenceForm() {
         fetchData();
     }, []);
 
+    let spinnerClasses = 'd-flex justify-content-center mb-3';
+    let dropdownClasses = 'form-select d-none';
+    if (conferences.length > 0) {
+    spinnerClasses = 'd-flex justify-content-center mb-3 d-none';
+    dropdownClasses = 'form-select';
+    }
+
+    let messageClasses = 'alert alert-success d-none mb-0';
+    let formClasses = '';
+    if (hasSignedUp) {
+    messageClasses = 'alert alert-success mb-0';
+    formClasses = 'd-none';
+    }
+
     return (
-        <div className="my-5">
+        <div className="my-5 container">
         <div className="row">
             <div className="col col-sm-auto">
             <img width="300" className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg"/>

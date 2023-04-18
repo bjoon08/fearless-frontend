@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function Nav() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -9,9 +11,11 @@ function Nav() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="#">Home</a>
-                <a className="nav-link" aria-current="page" href="new-location.html">New Location</a>
-                <a className="nav-link" aria-current="page" href="new-conference.html">New Conference</a>
+                <NavLink className="nav-link" aria-current="page" to="#">Home</NavLink>
+                <NavLink className="nav-link" aria-current="page" to="/locations/new">New Location</NavLink>
+                <NavLink className="nav-link" aria-current="page" to="/conferences/new">New Conference</NavLink>
+                <NavLink className="nav-link" aria-current="page" to="/attendees/new">New Attendee</NavLink>
+                <NavLink className="nav-link" aria-current="page" to="/presentations/new">New Presentation</NavLink>
             </li>
             </ul>
         </div>
