@@ -69,7 +69,7 @@ function AttendConferenceForm() {
             <div className="col">
             <div className="card shadow">
                 <div className="card-body">
-                <form id="create-attendee-form">
+                <form onSubmit={handleSubmit} id="create-attendee-form">
                     <h1 className="card-title">It's Conference Time!</h1>
                     <p className="mb-3">
                     Please choose which conference
