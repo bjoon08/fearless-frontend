@@ -6,11 +6,12 @@ function AttendConferenceForm() {
 
         const data = {};
 
-        data.full_name = fullName;
+        data.name = fullName;
         data.email = email;
+        data.conference = conference;
         console.log(data);
 
-        const attendeeUrl = 'http://localhost:8000/api/id/attendees/'
+        const attendeeUrl = 'http://localhost:8001/api/attendees/'
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -26,14 +27,20 @@ function AttendConferenceForm() {
 
             setFullName('');
             setEmail('');
-            setShowSuccessMessage(true);
+            setConference('');
+            // setShowSuccessMessage(true);
         }
     }
 
     const [conferences, setConferences] = useState([]);
 
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    // const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
+    const [conference, setConference] = useState('');
+    const handleConferenceChange = (event) => {
+        const value = event.target.value;
+        setConference(value);
+    }
     const [fullName, setFullName] = useState('');
     const handleFullNameChange = (event) => {
         const value = event.target.value;
@@ -81,11 +88,11 @@ function AttendConferenceForm() {
                     </div>
                     </div>
                     <div className="mb-3">
-                    <select name="conference" id="conference" className="form-select" required>
+                    <select onChange={handleConferenceChange} name="conference" id="conference" className="form-select" required value={conference}>
                         <option value="">Choose a conference</option>
                         {conferences.map(conference => {
                             return (
-                                <option key={conference.name} value={conference.name}>
+                                <option key={conference.href} value={conference.href}>
                                     {conference.name}
                                 </option>
                             );
@@ -98,13 +105,13 @@ function AttendConferenceForm() {
                     <div className="row">
                     <div className="col">
                         <div className="form-floating mb-3">
-                        <input onChange={handleFullNameChange} required placeholder="Your full name" type="text" id="name" name="name" className="form-control"/>
+                        <input onChange={handleFullNameChange} required placeholder="Your full name" type="text" id="name" name="name" className="form-control" value={fullName}/>
                         <label htmlFor="name">Your full name</label>
                         </div>
                     </div>
                     <div className="col">
                         <div className="form-floating mb-3">
-                        <input onChange={handleEmailChange} required placeholder="Your email address" type="email" id="email" name="email" className="form-control"/>
+                        <input onChange={handleEmailChange} required placeholder="Your email address" type="email" id="email" name="email" className="form-control" value={email}/>
                         <label htmlFor="email">Your email address</label>
                         </div>
                     </div>
